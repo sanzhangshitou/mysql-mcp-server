@@ -1,0 +1,63 @@
+{
+  "name": "@sanzhangshitou/mysql-mcp-server",
+  "version": "1.0.0",
+  "description": "MySQL MCP 服务器，为 AI 助手提供 MySQL 数据库操作能力",
+  "keywords": [
+    "mcp",
+    "mysql",
+    "model-context-protocol",
+    "ai",
+    "llm",
+    "claude"
+  ],
+  "author": "sanzhangshitou",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanzhangshitou/mysql-mcp-server.git"
+  },
+  "homepage": "https://github.com/sanzhangshitou/mysql-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/sanzhangshitou/mysql-mcp-server/issues"
+  },
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "mysql-mcp-server": "./dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    "check": "npm run lint && npm run format:check",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "dotenv": "^17.4.2",
+    "mysql2": "^3.22.2",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "@types/node": "^25.6.0",
+    "eslint": "^9.24.0",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.30.1"
+  }
+}
