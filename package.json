@@ -1,6 +1,6 @@
 {
   "name": "@sanzhangshitou/mysql-mcp-server",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "MySQL MCP 服务器，为 AI 助手提供 MySQL 数据库操作能力",
   "keywords": [
     "mcp",
