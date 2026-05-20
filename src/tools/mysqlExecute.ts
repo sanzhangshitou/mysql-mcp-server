@@ -2,7 +2,7 @@ import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 
-import { config } from "../config.js";
+import { config, isConfigValid } from "../config.js";
 import { pool } from "../mysql.js";
 import { getSqlCommand, isWriteOrDangerousCommand } from "../sql.js";
 import { formatMysqlResult, stringifyResult } from "../result.js";
@@ -20,6 +20,22 @@ export function registerMysqlExecuteTool(server: McpServer) {
         },
         async ({ sql, params = [] }) => {
             try {
+                if (!isConfigValid() || !pool) {
+                    return {
+                        isError: true,
+                        content: [
+                            {
+                                type: "text",
+                                text: stringifyResult({
+                                    error: "Database temporarily unavailable. Please configure MYSQL_USER, MYSQL_PASSWORD, and MYSQL_DATABASE environment variables.",
+                                    sql,
+                                    params
+                                })
+                            }
+                        ]
+                    };
+                }
+
                 const command = getSqlCommand(sql);
                 const isWrite = isWriteOrDangerousCommand(sql);
 

@@ -14,8 +14,6 @@ export const config = {
     allowWrite: (process.env.ALLOW_WRITE ?? "false").toLowerCase() === "true"
 };
 
-export function validateConfig() {
-    if (!config.mysql.user || !config.mysql.password || !config.mysql.database) {
-        throw new Error("Missing required env: MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE");
-    }
+export function isConfigValid(): boolean {
+    return !!(config.mysql.user && config.mysql.password && config.mysql.database);
 }
